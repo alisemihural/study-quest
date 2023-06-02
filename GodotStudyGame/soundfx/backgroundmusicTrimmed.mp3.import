@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/backgroundmusicTrimmed.mp3-818e10f56fd0a66957a22561ba758bcd.mp3str"
+
+[deps]
+
+source_file="res://soundfx/backgroundmusicTrimmed.mp3"
+dest_files=[ "res://.import/backgroundmusicTrimmed.mp3-818e10f56fd0a66957a22561ba758bcd.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

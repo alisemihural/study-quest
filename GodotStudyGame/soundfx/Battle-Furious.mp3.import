@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Battle-Furious.mp3-983789d9588d6de79f35cf1fc2c6b88e.mp3str"
+
+[deps]
+
+source_file="res://soundfx/Battle-Furious.mp3"
+dest_files=[ "res://.import/Battle-Furious.mp3-983789d9588d6de79f35cf1fc2c6b88e.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

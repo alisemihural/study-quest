@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Quiz</title>
+	<style>
+		body {
+			background-color: #3f3754;
+			font-family: Arial, sans-serif;
+			color: #d57162;
+			text-align: center;
+			font-size: 30px;
+			margin-top: 15%;
+		}
+
+		h1 {
+			color: #fbf3db;
+			margin-bottom: 20px;
+		}
+
+		label {
+			display: block;
+			margin-top: 20px;
+		}
+
+		input[type="text"] {
+			padding: 5px;
+			border-radius: 5px;
+			border: none;
+			background-color: #ffffff;
+			margin-top: 10px;
+			margin-bottom: 20px;
+			box-shadow: 2px 2px 5px #aaaaaa;
+		}
+
+		button {
+			padding: 10px 20px;
+			background-color: #fbf3db;
+			color: #3f3754;
+			border: none;
+			border-radius: 5px;
+			box-shadow: 2px 2px 5px #aaaaaa;
+			cursor: pointer;
+		}
+
+		button:hover {
+			background-color: #d57162;
+      		color: #fbf3db;
+		}
+		#answerLabel{
+			margin-bottom: 2%;
+		}
+
+		.answer {
+		margin: 1rem;
+		padding: 2rem 2rem;
+		text-align: center;
+		}
+		.answerChild {
+		display: inline-block;
+		padding: 1rem 1rem;
+		vertical-align: middle;
+		}
+	</style>
+</head>
+<body>
+	<a href="#" id="openRewardsLink" data-url="{% url 'openRewards' %}"></a>
+	<div id="page">
+	<h1>TRIGONOMETRY QUIZ</h1>
+
+	<div id="question"></div>
+	<div class="answer">
+		<label for="answer" class="answerChild" id="answerLabel">Answer:</label>
+		<input type="text" id="answer" class="answerChild">
+		<button onclick="checkAnswer()" id="button" class="answerChild">Submit</button>
+	</div>
+  	<div id="result"></div>
+	<label class="answerChild" style="margin-top: 2%;">Points:</label>
+	<div class="answerChild" id="points"></div>
+	</div>	
+	<script>
+		// Define the questions and answers in a two-dimensional array
+		const quiz = [
+      			[ 
+    "What is the Pythagorean Identity?",
+    "sin^2θ + cos^2θ = 1"
+  ],
+  [
+    "What is the value of sin(π/2)?",
+    "1"
+  ],
+  [
+    "What is the definition of the tangent function?",
+    "tanθ = sinθ/cosθ"
+  ],
+  [
+    "What is the period of the function y = 3sin(2x)?",
+    "π"
+  ],
+  [
+    "What is the relationship between the sine and cosine functions?",
+    "The cosine function is the sine function shifted by π/2 to the right"
+  ],
+  [
+    "What is the Law of Sines used for?",
+    "The Law of Sines is used to solve triangles that do not have a right angle"
+  ],
+  [
+    "What is the Law of Cosines used for?",
+    "The Law of Cosines is used to solve triangles when only two sides and the included angle are known."
+  ],
+  [
+    "What is the relationship between the sine and cosine of complementary angles?",
+    "The sine of an angle is equal to the cosine of its complementary angle, and vice versa."
+  ],
+  [
+    "What is the derivative of sin(x)?",
+    "cos(x)"
+  ],
+  [
+    "What is the derivative of tan(x)?",
+    "sec^2(x)"
+  ]
+		];
+    
+    let currentQuestionIndex = Math.floor(Math.random() * quiz.length);
+	var submitButton = document.getElementById("button");
+	var userPointLabel = document.getElementById("points");
+	var userPoints = 0;
+	var link = document.getElementById('openRewardsLink');
+	var url = link.getAttribute('data-url');
+    
+		// Display the current question on the page
+		function displayQuestion() {
+			submitButton.style.display = "inline";
+			userPointLabel.innerHTML = "<h2 style='margin-bottom: 1%;'>" + userPoints + "</h2>";
+			if(userPoints == 1){
+				window.location.href = url;
+			}
+			const question = quiz[currentQuestionIndex][0];
+			const answer = quiz[currentQuestionIndex][1];
+			document.getElementById("question").innerHTML = question;
+			document.getElementById("answer").value = "";
+			document.getElementById("result").innerHTML = "";
+		}
+		displayQuestion();
+
+		// Check if the user's answer matches the correct answer
+		function checkAnswer() {
+			const userAnswer = document.getElementById("answer").value;
+			const resultDiv = document.getElementById("result");
+			if (userAnswer.toLowerCase() === quiz[currentQuestionIndex][1].toLowerCase()) {
+				resultDiv.innerHTML = "<p class='correct'>Correct!</p>";
+				userPoints += 1;
+				userPointLabel.innerHTML = "<p>" + userPoints + "</p>";
+			} else {
+				resultDiv.innerHTML = "<p class='incorrect'>Incorrect. The correct answer is " + quiz[currentQuestionIndex][1] + "</p>";
+			}
+			currentQuestionIndex = (currentQuestionIndex + 1) % quiz.length;
+			submitButton.style.display = "none";
+			setTimeout(displayQuestion, 2000);
+		}
+	</script>
+</body>
+</html>

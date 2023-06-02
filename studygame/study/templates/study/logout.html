@@ -1,0 +1,10 @@
+{% extends 'study/header.html' %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="container">
+        <h1>You have been logged out</h1>
+        <h5><a href="{% url 'login' %}" style="color: #fbf3db;">Login In Again</a></h5>
+    </div>    
+
+{% endblock %}

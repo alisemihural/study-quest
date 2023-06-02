@@ -1,0 +1,65 @@
+{% extends 'study/header.html' %}
+
+{% block content %}
+
+{% load static %}
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery UI Sortable - Display as grid</title>
+  <link rel="stylesheet" href="{% static 'inventory/jQueryUI.css' %}">
+  <style>
+  #sortable { list-style-type: none; margin: 0; padding: 0; width: 450px; margin-left: 35%; margin-top: 2%; }
+  #sortable li { margin: 2px 2px 2px 0; padding: 1px; float: left; width: 100px; height: 90px; font-size: 4em; text-align: center; }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#sortable" ).sortable();
+    $( "#sortable" ).disableSelection();
+  } );
+  </script>
+</head>
+<body>
+<div class="inventory">
+<ul id="sortable">
+  {% if sircumferenceBow %}
+    <li class="ui-state-default"><img src="../../static/media/Sir Cumference's Bow.png" style="width: 100%" /></li>
+  {% endif %}
+  {% if eulerSword %}
+    <li class="ui-state-default"><img src="../../static/media/Euler's Edge.png" style="width: 100%" /></li>
+  {% endif %}
+  {% if newtonHammer %}
+    <li class="ui-state-default"><img src="../../static/media/Newton's Crasher.png" style="width: 100%" /></li>
+  {% endif %}
+  {% if riemannAxe %}
+    <li class="ui-state-default"><img src="../../static/media/Riemann Chopper.png" style="width: 100%" /></li>
+  {% endif %}
+  {% if achimedesScythe %}
+    <li class="ui-state-default"><img src="../../static/media/Archimedes Angle Cutter.png" style="width: 100%" /></li>
+  {% endif %}
+  {% if alkhwarizmiDagger %}
+    <li class="ui-state-default"><img src="../../static/media/Al-Khwarizmi's Dagger.png" style="width: 100%" /></li>
+  {% endif %}  
+  {% if pythagorasSpear %}
+    <li class="ui-state-default"><img src="../../static/media/Pythagoras' Pike.png" style="width: 100%" /></li>
+  {% endif %}
+  {% if mushroom %}
+    <li class="ui-state-default"><img src="../../static/media/mushroom.png" style="width: 100%" /></li>
+  {% endif %}
+  {% if strawberry %}
+    <li class="ui-state-default"><img src="../../static/media/strawberry.png" style="width: 100%" /></li>
+  {% endif %}
+  {% if apple %}
+    <li class="ui-state-default"><img src="../../static/media/apple.png" style="width: 100%" /></li>
+  {% endif %}
+
+</ul>
+</div> 
+ 
+</body>
+
+
+{% endblock %}

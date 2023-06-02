@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery UI Sortable - Display as grid</title>
+  <link rel="stylesheet" href="jQueryUI.css">
+  <link rel="stylesheet" href="script.js">
+  <style>
+  #sortable { list-style-type: none; margin: 0; padding: 0; width: 450px; }
+  #sortable li { margin: 2px 2px 2px 0; padding: 1px; float: left; width: 100px; height: 90px; font-size: 4em; text-align: center; }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#sortable" ).sortable();
+    $( "#sortable" ).disableSelection();
+  } );
+  </script>
+</head>
+<body>
+ 
+<ul id="sortable">
+  <li class="ui-state-default"><img src="Sir Cumference's Bow.png" style="width: 100%" /></li>
+  <li class="ui-state-default"><img src="Euler's Edge.png" style="width: 100%" /></li>
+  <li class="ui-state-default"><img src="Newton's Crasher.png" style="width: 100%" /></li>
+  <li class="ui-state-default"><img src="Riemann Chopper.png" style="width: 100%" /></li>
+  <li class="ui-state-default"><img src="Archimedes Angle Cutter.png" style="width: 100%" /></li>
+  <li class="ui-state-default"><img src="Al-Khwarizmi's Dagger.png" style="width: 100%" /></li>
+  <li class="ui-state-default"><img src="Pythagoras' Pike.png" style="width: 100%" /></li>
+  <li class="ui-state-default"><img src="mushroom.png" style="width: 100%" /></li>
+  <li class="ui-state-default"><img src="strawberry.png" style="width: 100%" /></li>
+  <li class="ui-state-default"><img src="apple.png" style="width: 100%" /></li>
+
+</ul>
+ 
+ 
+</body>
+</html>

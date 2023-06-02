@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Study Quest</title>
+  {% load static %}
+  <link href="{% static 'header/header.css' %}" rel="stylesheet" type="text/css" />
+  <nav>
+    <div class="rectangle">
+    <img src="{% static 'media/logo.png' %}" alt="Logo" class="headerImg">
+    </div>
+    <ul>
+    <li><a href="/home/">HOME PAGE</a></li>
+    {% if user.is_authenticated %}
+    <li><a href="/game/">GAME</a></li>
+    <li><a href="/study/">STUDY</a></li>
+    <li><a href="/plan/">PLANNER</a></li>
+    {% endif %}
+    <li><a href="/aboutus/">ABOUT US</a></li>
+    <div id="accountButtons">
+      {% if user.is_authenticated %}
+      <li><a href="/inventory/">INVENTORY</a></li>
+      <li ><a href="/profile/">PROFILE</a></li>
+      <li><a href="/logout/">LOGOUT</a></li>
+      {% else %}
+      <li ><a href="/login/">SIGN IN</a></li>
+      <li><a href="/register/">CREATE AN ACCOUNT</a></li>
+      {% endif %}
+    </div>
+    </ul> 
+  </nav>
+</head>
+
+<body>
+  <div>
+    {% block content %}
+    {% endblock content %}
+  </div>
+</body>
+
+</html>

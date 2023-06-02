@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prize randomizers</title>
+    <style>
+        .container {
+            width: 70%;
+            margin: auto;
+            text-align: center;
+        }
+
+        .dice {
+            text-align: center;
+            display: inline-block;
+            margin: 10px;
+        }
+
+        body {
+            background-color: #3f3754;
+            margin: 0;
+        }
+
+        h1 {
+            margin: 30px;
+            font-family: "Lobster", cursive;
+            text-shadow: 5px 0 #232931;
+            font-size: 4.5rem;
+            color: #4ecca3;
+            text-align: center;
+        }
+
+        p {
+            font-size: 2rem;
+            color: #4ecca3;
+            font-family: "Indie Flower", cursive;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        .bottom {
+            padding-top: 30px;
+        }
+
+        .btn {
+            background: #4ecca3;
+            font-family: "Indie Flower", cursive;
+            border-radius: 7px;
+            color: #ffff;
+            font-size: 30px;
+            padding: 16px 25px 16px 25px;
+            text-decoration: none;
+        }
+
+        .butn:hover {
+            background: #232931;
+            text-decoration: none;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Rewards</h1>
+
+        <div class="dice">
+            <p class="Player1"></p>
+            <img src="cardpack2.png" alt="cardpack2" class="img1" style="width: 300px; height: 300px;">
+        </div>
+        <div class="dice">
+            <p class="Player2"></p>
+            <img src="cardpack2.png" alt="cardpack2" class="img2" style="width: 300px; height: 300px;">
+        </div>
+        <div class="dice">
+            <p class="Player3"></p>
+            <img src="cardpack2.png" alt="cardpack2" class="img3" style="width: 300px; height: 300px;">
+        </div>
+    
+
+    <div class="container bottom">
+      <button id="button" class="btn" onclick="rollTheDice()"> Open your Rewards</button>
+</div>
+    <script>
+      
+        function rollTheDice() {
+            let diceNum1 = document.querySelector(".img1");
+            let diceNum2 = document.querySelector(".img2");
+            let diceNum3 = document.querySelector(".img3");
+
+            let result = document.querySelector('h1')
+            result.innerHTML = ""
+            setTimeout(() => {
+                let randomNumber1 = Math.floor(Math.random() * 10) + 1;
+                let randomNumber2 = Math.floor(Math.random() * 10) + 1;
+                let randomNumber3 = Math.floor(Math.random() * 10) + 1;
+
+
+                diceNum1.setAttribute('src', randomNumber1 + '.png');
+                diceNum2.setAttribute('src', randomNumber2 + '.png');
+                diceNum3.setAttribute('src', randomNumber3 + '.png');
+            
+            }, 2500);
+          const element = document.getElementById("button");
+          element.remove();
+
+        }
+
+    </script>
+</body>
+
+</html>

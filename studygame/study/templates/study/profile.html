@@ -1,0 +1,15 @@
+{% extends 'study/header.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <style>
+        h2{
+            color: #3f3754;
+            margin-left: 10%;
+        }
+    </style>
+    <div class="container" style="background-color: #fbf3db; width: 25%;">
+        <h2>Username: {{user.username}}</h2>
+    <h2>Email: {{user.email}}</h2>
+    </div>
+{% endblock %}

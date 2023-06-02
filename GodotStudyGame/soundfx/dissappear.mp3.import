@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/dissappear.mp3-458a32d4baccadb32ba6d1674685d379.mp3str"
+
+[deps]
+
+source_file="res://soundfx/dissappear.mp3"
+dest_files=[ "res://.import/dissappear.mp3-458a32d4baccadb32ba6d1674685d379.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

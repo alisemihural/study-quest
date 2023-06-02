@@ -1,0 +1,63 @@
+{% extends 'study/header.html' %}
+
+{% block content %}
+
+{% load static %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-wdith, initial-scale=1">
+    <title>Team section</title>
+    <link rel= "stylesheet" type="text/css" href="{% static 'aboutus/aboutus.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
+ 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Trispace:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+ 
+</head>
+<body>
+ 
+    <section class="team">
+        <div class="center">
+            <h1>Meet Our Team</h1>
+        </div>
+ 
+    <div class="team-content">
+        <div class="box">
+            <img src="{% static 'aboutus/jordynPhoto.png' %}" alt="">
+            <h3>Jordyn Carryl</h3>
+            <h5>Developer</h5>
+            <div class="icons">
+                <a href="#"><i class="ri-instagram-line"></i></a>
+            </div>
+        </div>
+        <div class="box">
+            <img src="{% static 'aboutus/nicolePhoto.png' %}">
+            <h3>Nicole Farrell</h3>
+            <h5>Developer</h5>
+            <div class="icons">
+                <a href="#"><i class="ri-instagram-line"></i></a>
+            </div>
+        </div>
+        <div class="box">
+            <img src="{% static 'aboutus/aliPhoto.png' %}">
+            <h3>Ali Ural</h3>
+            <h5>Back-End Developer</h5>
+            <div class="icons">
+                <a href="#"><i class="ri-instagram-line"></i></a>
+            </div>
+        </div>
+        <div class="box">
+            <img src="{% static 'aboutus/samayPhoto.png' %}">
+            <h3>Samay Patel</h3>
+            <h5>Developer</h5>
+            <div class="icons">
+                <a href="#"><i class="ri-instagram-line"></i></a>
+            </div>
+        </div>
+    </div>
+    </section>
+ 
+
+</body>
+{% endblock %}

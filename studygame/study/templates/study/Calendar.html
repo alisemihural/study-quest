@@ -1,0 +1,88 @@
+{% extends 'study/header.html' %}
+
+{% block content %}
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'calendar/calendarstye.css' %}">
+
+    
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Calendar App Vanilla JS</title>
+    
+        
+      </head>
+      <body>
+        
+        <div id="container">
+          <div id="header">
+            <div id="monthDisplay"></div>
+            <div>
+              <button id="backButton">Back</button>
+              <button id="nextButton">Next</button>
+            </div>
+          </div>
+    
+          <div id="weekdays">
+            <div>Sunday</div>
+            <div>Monday</div>
+            <div>Tuesday</div>
+            <div>Wednesday</div>
+            <div>Thursday</div>
+            <div>Friday</div>
+            <div>Saturday</div>
+          </div>
+    
+          <div id="calendar"></div>
+        </div>
+    
+        <div id="newEventModal">
+          <h2>New Event</h2>
+    
+          <input id="eventTitleInput" placeholder="Event Title" />
+          <form id="form">
+            <br>
+            <label for="location"> Add Location:</label>
+            <input type="text" id="location" name="location"><br>
+            <br>
+            <label for="starts">Starts:</label>
+            <input type="text" id="starts" name="starts"><br>
+            <br>
+            <label for="date">Date (mm/dd/yyyy):</label>
+            <input type="text" id="date" name="date"><br>
+            <br>
+            <label for="ends">Ends:</label>
+            <input type="text" id="ends" name="ends"><br>
+            <br>
+            <label for="notes">Notes:</label>
+            <input type="text" id="notes" name="notes"><br>
+          </form>
+    
+          <button id="saveButton">Save</button>
+          <button id="cancelButton">Cancel</button>
+        </div>
+    
+        <div id="deleteEventModal">
+          <h2>Event</h2>
+    
+          <p id="eventText"></p>
+    
+          <button id="deleteButton">Delete</button>
+          <button id="closeButton">Close</button>
+        </div>
+    
+        <div id="modalBackDrop"></div>
+    
+      
+      </body>
+    </html>
+
+    <script src="{% static 'calendar/calendar.js' %}"></script>
+
+
+{% endblock %}

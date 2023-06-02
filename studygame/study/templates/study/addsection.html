@@ -1,0 +1,56 @@
+{% extends 'study/header.html' %}
+
+{% block content %}
+
+<div id="container">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  
+  {% load static %}
+  <link href="{% static 'addsection/addsection.css' %}" rel="stylesheet" type="text/css" />
+
+  <div class="rectangle2">
+  <div id="container2">  
+    <h1><label for="name"> Name:</label>
+      <input type="text" id="name" name="name"><br></h1>
+    
+    <label for="colors" id="colorlabel">Color: </label>
+      <select name="colors" id="colors">
+        <option value="red" id="red">Red</option>
+        <option value="yellow" id="yellow">Yellow</option>
+        <option value="green" id="Green">Green</option>
+        <option value="blue" id="blue">Blue</option>
+        
+      </select>
+      
+    
+    <form id="form">
+      <br>
+      <label for="location"> Add Location:</label>
+      <input type="text" id="location" name="location"><br>
+      <br>
+      <label for="starts">Starts:</label>
+      <input type="text" id="starts" name="starts"><br>
+      <br>
+      <label for="date">Date (mm/dd/yyyy):</label>
+      <input type="text" id="date" name="date"><br>
+      <br>
+      <label for="ends">Ends:</label>
+      <input type="text" id="ends" name="ends"><br>
+      <br>
+      <label for="notes">Notes:</label>
+      <input type="text" id="notes" name="notes"><br>
+    </form>
+
+    <button id="saveButton">SAVE</button>
+    <br>
+    <br>
+  </div>
+  </div>
+
+  
+  
+  <script src="{% static 'addsection/addsection.js' %}"></script>
+ 
+</div>
+{% endblock %}

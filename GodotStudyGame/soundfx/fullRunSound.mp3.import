@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/fullRunSound.mp3-ff2abfb43355f5c4dc9433fcb139301f.mp3str"
+
+[deps]
+
+source_file="res://soundfx/fullRunSound.mp3"
+dest_files=[ "res://.import/fullRunSound.mp3-ff2abfb43355f5c4dc9433fcb139301f.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

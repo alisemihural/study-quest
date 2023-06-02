@@ -1,0 +1,2069 @@
+[gd_scene load_steps=62 format=2]
+
+[ext_resource path="res://sprites/playerSprites/idle_1.png" type="Texture" id=1]
+[ext_resource path="res://monsters/FlyingEye/Flight.png" type="Texture" id=2]
+[ext_resource path="res://sprites/battleBackground.png" type="Texture" id=3]
+[ext_resource path="res://fonts/NESBoxFont.tres" type="DynamicFont" id=4]
+[ext_resource path="res://fonts/NESCyrillic.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://src/Battle.gd" type="Script" id=6]
+[ext_resource path="res://src/exampleEnemy.tres" type="Resource" id=7]
+[ext_resource path="res://sprites/itemSprites/Screenshot 2023-03-13 141646.png" type="Texture" id=8]
+[ext_resource path="res://sprites/itemSprites/Screenshot 2023-03-13 142042.png" type="Texture" id=9]
+[ext_resource path="res://sprites/itemSprites/Screenshot 2023-03-13 142055.png" type="Texture" id=10]
+[ext_resource path="res://sprites/itemSprites/Screenshot 2023-03-13 142005.png" type="Texture" id=11]
+[ext_resource path="res://sprites/itemSprites/36ca99223ba965f.png" type="Texture" id=12]
+[ext_resource path="res://monsters/FlyingEye/Skeleton/Idle.png" type="Texture" id=13]
+[ext_resource path="res://monsters/Undead executioner puppet/png/idle.png" type="Texture" id=14]
+[ext_resource path="res://sprites/itemSprites/bow.png" type="Texture" id=15]
+[ext_resource path="res://sprites/itemSprites/Screenshot 2023-03-13 142035.png" type="Texture" id=16]
+[ext_resource path="res://sprites/itemSprites/Screenshot 2023-03-13 142020.png" type="Texture" id=17]
+[ext_resource path="res://sprites/itemSprites/arrow.png" type="Texture" id=18]
+[ext_resource path="res://soundfx/8bit-Battle01.mp3" type="AudioStream" id=19]
+[ext_resource path="res://soundfx/button.mp3" type="AudioStream" id=20]
+[ext_resource path="res://soundfx/hit.mp3" type="AudioStream" id=21]
+[ext_resource path="res://soundfx/attack.mp3" type="AudioStream" id=22]
+[ext_resource path="res://soundfx/healing.mp3" type="AudioStream" id=23]
+[ext_resource path="res://soundfx/win.mp3" type="AudioStream" id=24]
+[ext_resource path="res://soundfx/loss.mp3" type="AudioStream" id=25]
+[ext_resource path="res://soundfx/runSound.mp3" type="AudioStream" id=26]
+[ext_resource path="res://soundfx/shieldSound.mp3" type="AudioStream" id=27]
+[ext_resource path="res://monsters/FlyingEye/tile000.png" type="Texture" id=28]
+[ext_resource path="res://soundfx/dissappear.mp3" type="AudioStream" id=29]
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 1, 0.054902, 1 )
+border_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 1, 0, 0, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0, 0, 0, 1 )
+expand_margin_left = 1.0
+expand_margin_right = 1.0
+expand_margin_top = 1.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.992157, 1, 0.101961, 1 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="DynamicFont" id=11]
+size = 45
+font_data = ExtResource( 5 )
+
+[sub_resource type="Animation" id=12]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Enemy/Enemies/Enemy:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Player/Player:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Player/Player:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 292, 233 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Enemy/Enemies/Enemy:rect_position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = false
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 745, 14 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Enemy/Enemies/Enemy/Sprite:texture")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = false
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 28 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Enemy/Enemies/Enemy/Sprite:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = false
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Enemy/Enemies/Enemy2/Sprite:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = false
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Enemy/Enemies:rect_position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 745, 14 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Enemy/Enemies:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Enemy/Enemies/Boss/Sprite:frame")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=34]
+resource_name = "bossIdle"
+length = 0.3
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Enemy/Enemies/Enemy/Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 2 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Enemy/Enemies/Enemy/Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3, 4, 5, 6, 7 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Enemy/Enemies/Enemy2/Sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Enemy/Enemies/Boss/Sprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=20]
+resource_name = "enemyAttackSword"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("Enemy/Enemies:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 745, 14 ), Vector2( 399, 203 ), Vector2( 745, 14 ) ]
+}
+
+[sub_resource type="Animation" id=27]
+resource_name = "enemyDamagedbySpear"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Enemy/Enemies/Enemy:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "enemyDamagedbySword"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Enemy/Enemies/Enemy:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Enemy/Enemies:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=21]
+resource_name = "enemyDied"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Enemy/Enemies/Enemy:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Enemy/Enemies:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 1.9, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=29]
+resource_name = "enemyIdle"
+length = 0.7
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Enemy/Enemies/Enemy/Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 2 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Enemy/Enemies/Enemy/Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "playerAttackSword"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("Player/Player:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 292, 233 ), Vector2( 617, 41 ), Vector2( 292, 233 ) ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "playerDamagedbySword"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Player/Player:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=33]
+resource_name = "skeletonIdle"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Enemy/Enemies/Enemy/Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 2 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Enemy/Enemies/Enemy/Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3, 4, 5, 6, 7 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Enemy/Enemies/Enemy2/Sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=16]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Enemy/Enemies/Enemy:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Player/Player:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Player/Player:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 292, 233 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Player/Player/swordSprite:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Player/Player/swordSprite:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Player/Player/swordSprite:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 181, 70 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Player/Player/axeSprite:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 174, 75 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Player/Player/axeSprite:rotation_degrees")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Player/Player/axeSprite:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Player/Player/axeSprite:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("Player/Player/swordSprite:self_modulate")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("Player/Player/swordSprite:modulate")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("Player/Player/hammerSprite:position")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 190, 65 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("Player/Player/hammerSprite:visible")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("Player/Player/hammerSprite:rotation_degrees")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -90.0 ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("Player/Player/hammerSprite:modulate")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("Player/Player/spearSprite:position")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 166, 88.0001 ) ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("Player/Player/spearSprite:rotation_degrees")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("Player/Player/spearSprite:modulate")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("Player/Player/healSprite:modulate")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/20/type = "value"
+tracks/20/path = NodePath("Player/Player/healSprite:position")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 32, 127 ) ]
+}
+tracks/21/type = "value"
+tracks/21/path = NodePath("Player/Player/healSprite:visible")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/22/type = "value"
+tracks/22/path = NodePath("Player/Player/spearSprite:visible")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/23/type = "value"
+tracks/23/path = NodePath("Player/Player/daggerSprite:visible")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/24/type = "value"
+tracks/24/path = NodePath("Player/Player/daggerSprite:modulate")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/25/type = "value"
+tracks/25/path = NodePath("Player/Player/scytheSprite:visible")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/26/type = "value"
+tracks/26/path = NodePath("Player/Player/scytheSprite:modulate")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/27/type = "value"
+tracks/27/path = NodePath("Player/Player/scytheSprite:rotation_degrees")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 120.0 ]
+}
+tracks/28/type = "value"
+tracks/28/path = NodePath("Player/Player/scytheSprite:position")
+tracks/28/interp = 1
+tracks/28/loop_wrap = true
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 187, 110 ) ]
+}
+tracks/29/type = "value"
+tracks/29/path = NodePath("Player/Player/bowSprite:visible")
+tracks/29/interp = 1
+tracks/29/loop_wrap = true
+tracks/29/imported = false
+tracks/29/enabled = true
+tracks/29/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/30/type = "value"
+tracks/30/path = NodePath("Player/Player/bowSprite:modulate")
+tracks/30/interp = 1
+tracks/30/loop_wrap = true
+tracks/30/imported = false
+tracks/30/enabled = true
+tracks/30/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/31/type = "value"
+tracks/31/path = NodePath("Player/Player/arrowSprite:visible")
+tracks/31/interp = 1
+tracks/31/loop_wrap = true
+tracks/31/imported = false
+tracks/31/enabled = true
+tracks/31/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/32/type = "value"
+tracks/32/path = NodePath("Player/Player/arrowSprite:modulate")
+tracks/32/interp = 1
+tracks/32/loop_wrap = true
+tracks/32/imported = false
+tracks/32/enabled = true
+tracks/32/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/33/type = "value"
+tracks/33/path = NodePath("Player/Player/arrowSprite:position")
+tracks/33/interp = 1
+tracks/33/loop_wrap = true
+tracks/33/imported = false
+tracks/33/enabled = true
+tracks/33/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 134, 118 ) ]
+}
+tracks/34/type = "value"
+tracks/34/path = NodePath("Player/Player/arrowSprite:rotation_degrees")
+tracks/34/interp = 1
+tracks/34/loop_wrap = true
+tracks/34/imported = false
+tracks/34/enabled = true
+tracks/34/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -30.0 ]
+}
+
+[sub_resource type="Animation" id=17]
+resource_name = "enemyDamagedbySword"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Enemy/Enemies/Enemy:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=28]
+resource_name = "healingAnimation"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("Player/Player/healSprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Player/Player/healSprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 32, 127 ), Vector2( 32, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Player/Player/healSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=24]
+resource_name = "playerAttackAxe"
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Player/Player:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2, 0.6, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 292, 233 ), Vector2( 617, 41 ), Vector2( 292, 233 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Player/Player/axeSprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 174, 75 ), Vector2( 174, 75 ), Vector2( 96.5, 80 ), Vector2( 187, 98 ), Vector2( 96.5, 80 ), Vector2( 174, 75 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Player/Player/axeSprite:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 90.0, 90.0, 0.0, 120.0, 0.0, 90.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Player/Player/axeSprite:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Player/Player/axeSprite:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1, 1.1, 1.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=30]
+resource_name = "playerAttackBow"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Player/Player:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/keys = {
+"times": PoolRealArray( 0.4, 0.8, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 292, 233 ), Vector2( 617, 41 ), Vector2( 292, 233 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Player/Player/bowSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Player/Player/bowSprite:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 1, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Player/Player/arrowSprite:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Player/Player/arrowSprite:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1, 0.7, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Player/Player/arrowSprite:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.2, 0.3, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 134, 118 ), Vector2( 125, 123 ), Vector2( 112, 130 ), Vector2( 470, -102 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Player/Player/arrowSprite:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -30.0 ]
+}
+
+[sub_resource type="Animation" id=31]
+resource_name = "playerAttackDagger"
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Player/Player:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2, 0.6, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 292, 233 ), Vector2( 617, 41 ), Vector2( 292, 233 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Player/Player/daggerSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Player/Player/daggerSprite:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 1.1, 1.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=25]
+resource_name = "playerAttackHammer"
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Player/Player:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2, 0.6, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 292, 233 ), Vector2( 617, 41 ), Vector2( 292, 233 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Player/Player/hammerSprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 190, 65 ), Vector2( 190, 65 ), Vector2( 117.5, 51 ), Vector2( 191, 152 ), Vector2( 117.5, 51 ), Vector2( 190, 65 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Player/Player/hammerSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Player/Player/hammerSprite:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, -60.0, 80.0, -60.0, 0.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Player/Player/hammerSprite:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1, 1.1, 1.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=32]
+resource_name = "playerAttackScythe"
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Player/Player:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2, 0.6, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 292, 233 ), Vector2( 617, 41 ), Vector2( 292, 233 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Player/Player/scytheSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Player/Player/scytheSprite:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 1.1, 1.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Player/Player/scytheSprite:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.2, 0.4, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 120.0, 150.0, 30.0, 150.0, 120.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Player/Player/scytheSprite:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.2, 0.4, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 187, 110 ), Vector2( 186.5, 130 ), Vector2( 131, 86 ), Vector2( 186.5, 130 ), Vector2( 187, 110 ) ]
+}
+
+[sub_resource type="Animation" id=26]
+resource_name = "playerAttackSpear"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Player/Player:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.4, 0.8, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 292, 233 ), Vector2( 617, 41 ), Vector2( 292, 233 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Player/Player/spearSprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2, 0.3, 0.4, 0.6, 0.7, 0.8, 0.9, 1, 1.2, 1.3, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 166, 88.0001 ), Vector2( 124, 135 ), Vector2( 158, 96 ), Vector2( 138.5, 118 ), Vector2( 187, 68 ), Vector2( 187, 68 ), Vector2( 187, 68 ), Vector2( 138.5, 118 ), Vector2( 158, 96 ), Vector2( 124, 135 ), Vector2( 166, 88.0001 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Player/Player/spearSprite:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2, 0.3, 0.4, 1.2, 1.3, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 180.0, 360.0, 360.0, 180.0, 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Player/Player/spearSprite:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1, 1.5, 1.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Player/Player/spearSprite:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=18]
+resource_name = "playerAttackSword"
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Player/Player:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2, 0.6, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 292, 233 ), Vector2( 617, 41 ), Vector2( 292, 233 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Player/Player/swordSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Player/Player/swordSprite:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2, 0.4, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -90.0, 45.0, -90.0, 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Player/Player/swordSprite:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.2, 0.4, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 181, 70 ), Vector2( 93.5, 76 ), Vector2( 199, 112 ), Vector2( 93.5, 76 ), Vector2( 181, 70 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Player/Player/swordSprite:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1, 1.1, 1.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=19]
+resource_name = "playerDamagedbySword"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Player/Player:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=22]
+resource_name = "playerDied"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Player/Player:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=23]
+resource_name = "playerRun"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Player/Player:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 292, 233 ), Vector2( -165, 220 ) ]
+}
+
+[node name="Battle" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 6 )
+enemy = ExtResource( 7 )
+
+[node name="Background" type="TextureRect" parent="."]
+self_modulate = Color( 0.435294, 0.435294, 0.435294, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1.0
+margin_right = 1.0
+texture = ExtResource( 3 )
+stretch_mode = 1
+
+[node name="Enemy" type="Node" parent="."]
+
+[node name="Panel" type="Panel" parent="Enemy"]
+margin_left = 62.0
+margin_top = 104.0
+margin_right = 433.0
+margin_bottom = 185.0
+custom_styles/panel = SubResource( 7 )
+
+[node name="Enemies" type="TextureRect" parent="Enemy"]
+margin_left = 745.0
+margin_top = 14.0
+margin_right = 785.0
+margin_bottom = 54.0
+
+[node name="Enemy" type="TextureRect" parent="Enemy/Enemies"]
+visible = false
+margin_right = 56.0
+margin_bottom = 92.0
+rect_scale = Vector2( 2, 2 )
+stretch_mode = 3
+
+[node name="Sprite" type="Sprite" parent="Enemy/Enemies/Enemy"]
+position = Vector2( 35, 44.5 )
+scale = Vector2( 1.60937, 1.60937 )
+texture = ExtResource( 2 )
+flip_h = true
+hframes = 8
+
+[node name="Enemy2" type="TextureRect" parent="Enemy/Enemies"]
+visible = false
+margin_right = 64.0
+margin_bottom = 64.0
+rect_scale = Vector2( 2, 2 )
+stretch_mode = 3
+
+[node name="Sprite" type="Sprite" parent="Enemy/Enemies/Enemy2"]
+position = Vector2( 35, 44.5 )
+scale = Vector2( 1.60937, 1.60937 )
+texture = ExtResource( 13 )
+flip_h = true
+hframes = 4
+
+[node name="Boss" type="TextureRect" parent="Enemy/Enemies"]
+visible = false
+margin_right = 64.0
+margin_bottom = 64.0
+rect_scale = Vector2( 2, 2 )
+stretch_mode = 3
+
+[node name="Sprite" type="Sprite" parent="Enemy/Enemies/Boss"]
+position = Vector2( 35, 44.5 )
+scale = Vector2( 1.60937, 1.60937 )
+texture = ExtResource( 14 )
+flip_h = true
+hframes = 5
+
+[node name="enemyHealthBar" type="ProgressBar" parent="Enemy"]
+margin_left = 78.0
+margin_top = 151.0
+margin_right = 413.0
+margin_bottom = 161.0
+rect_min_size = Vector2( 300, 10 )
+rect_pivot_offset = Vector2( 150, 5 )
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+value = 50.0
+percent_visible = false
+
+[node name="HealthLabel" type="Label" parent="Enemy/enemyHealthBar"]
+margin_left = 217.0
+margin_top = -34.0
+margin_right = 332.0
+margin_bottom = -12.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 4 )
+text = "HP: 5/10"
+
+[node name="NameLabel" type="Label" parent="Enemy/enemyHealthBar"]
+margin_top = -35.0
+margin_right = 80.0
+margin_bottom = -13.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 4 )
+text = "enemy"
+
+[node name="Player" type="Node" parent="."]
+
+[node name="Panel" type="Panel" parent="Player"]
+margin_left = 650.0
+margin_top = 339.0
+margin_right = 1021.0
+margin_bottom = 420.0
+custom_styles/panel = SubResource( 8 )
+
+[node name="Player" type="TextureRect" parent="Player"]
+margin_left = 292.0
+margin_top = 233.0
+margin_right = 500.0
+margin_bottom = 456.0
+texture = ExtResource( 1 )
+stretch_mode = 1
+flip_h = true
+
+[node name="swordSprite" type="Sprite" parent="Player/Player"]
+visible = false
+position = Vector2( 181, 70 )
+scale = Vector2( 0.253086, 0.253086 )
+texture = ExtResource( 8 )
+
+[node name="axeSprite" type="Sprite" parent="Player/Player"]
+visible = false
+position = Vector2( 174, 75 )
+scale = Vector2( 0.275924, 0.275924 )
+texture = ExtResource( 9 )
+flip_h = true
+
+[node name="hammerSprite" type="Sprite" parent="Player/Player"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 190, 65 )
+rotation = -1.5708
+scale = Vector2( 0.209141, 0.209141 )
+texture = ExtResource( 10 )
+
+[node name="spearSprite" type="Sprite" parent="Player/Player"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 166, 88.0001 )
+scale = Vector2( 0.267724, 0.267724 )
+texture = ExtResource( 11 )
+
+[node name="healSprite" type="Sprite" parent="Player/Player"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 32, 127 )
+scale = Vector2( 0.211765, 0.211765 )
+texture = ExtResource( 12 )
+
+[node name="36Ca99223Ba965f2" type="Sprite" parent="Player/Player/healSprite"]
+position = Vector2( 174.722, 382.5 )
+scale = Vector2( 0.727777, 0.727778 )
+texture = ExtResource( 12 )
+
+[node name="36Ca99223Ba965f3" type="Sprite" parent="Player/Player/healSprite"]
+position = Vector2( 448.611, 113.333 )
+scale = Vector2( 0.99, 0.99 )
+texture = ExtResource( 12 )
+
+[node name="daggerSprite" type="Sprite" parent="Player/Player"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 160, 116 )
+rotation = 0.785398
+scale = Vector2( 0.130189, 0.130189 )
+texture = ExtResource( 17 )
+
+[node name="scytheSprite" type="Sprite" parent="Player/Player"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 187, 110 )
+rotation = 2.0944
+scale = Vector2( 0.239316, 0.239316 )
+texture = ExtResource( 16 )
+flip_h = true
+
+[node name="bowSprite" type="Sprite" parent="Player/Player"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 133, 118 )
+rotation = -0.523599
+scale = Vector2( 0.255124, 0.255124 )
+texture = ExtResource( 15 )
+
+[node name="arrowSprite" type="Sprite" parent="Player/Player"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 134, 118 )
+rotation = -0.523599
+scale = Vector2( 0.255, 0.255 )
+texture = ExtResource( 18 )
+
+[node name="playerHealthBar" type="ProgressBar" parent="Player"]
+margin_left = 675.0
+margin_top = 386.0
+margin_right = 1004.0
+margin_bottom = 397.0
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+value = 50.0
+percent_visible = false
+
+[node name="HealthLabel" type="Label" parent="Player/playerHealthBar"]
+margin_left = 212.0
+margin_top = -35.0
+margin_right = 327.0
+margin_bottom = -10.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 4 )
+text = "HP: 5/10"
+
+[node name="NameLabel" type="Label" parent="Player/playerHealthBar"]
+margin_left = 6.0
+margin_top = -34.0
+margin_right = 94.0
+margin_bottom = -12.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 4 )
+text = "Player"
+
+[node name="NameLabel2" type="Label" parent="Player/playerHealthBar"]
+margin_left = -635.0
+margin_top = -364.0
+margin_right = -547.0
+margin_bottom = -342.0
+custom_colors/font_color = Color( 1, 1, 0, 1 )
+custom_fonts/font = ExtResource( 4 )
+text = "Round 1"
+
+[node name="AttackPanel" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -512.0
+margin_top = -111.0
+margin_right = 512.0
+custom_styles/panel = SubResource( 3 )
+
+[node name="Attacks" type="HBoxContainer" parent="AttackPanel"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -90.0
+margin_bottom = -20.0
+custom_constants/separation = 27
+alignment = 1
+
+[node name="Sword" type="Button" parent="AttackPanel/Attacks"]
+visible = false
+margin_left = 71.0
+margin_right = 271.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 200, 50 )
+focus_mode = 0
+mouse_default_cursor_shape = 2
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/normal = SubResource( 4 )
+enabled_focus_mode = 0
+text = "EULER'S EDGE"
+
+[node name="Axe" type="Button" parent="AttackPanel/Attacks"]
+visible = false
+margin_left = 185.0
+margin_right = 385.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 200, 50 )
+focus_mode = 0
+mouse_default_cursor_shape = 2
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/normal = SubResource( 4 )
+enabled_focus_mode = 0
+text = "RIEMANN CHOPPER"
+
+[node name="Hammer" type="Button" parent="AttackPanel/Attacks"]
+visible = false
+margin_left = 298.0
+margin_right = 498.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 200, 50 )
+focus_mode = 0
+mouse_default_cursor_shape = 2
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/normal = SubResource( 4 )
+enabled_focus_mode = 0
+text = "NEWTON'S CRASHER"
+
+[node name="Dagger" type="Button" parent="AttackPanel/Attacks"]
+visible = false
+margin_left = 237.0
+margin_right = 481.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 200, 50 )
+focus_mode = 0
+mouse_default_cursor_shape = 2
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/normal = SubResource( 4 )
+enabled_focus_mode = 0
+text = "AL-KHWARIZMI'S DAGGER"
+
+[node name="Scythe" type="Button" parent="AttackPanel/Attacks"]
+visible = false
+margin_left = 373.0
+margin_right = 651.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 200, 50 )
+focus_mode = 0
+mouse_default_cursor_shape = 2
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/normal = SubResource( 4 )
+enabled_focus_mode = 0
+text = "Archimedes' Angle Cutter"
+
+[node name="Spear" type="Button" parent="AttackPanel/Attacks"]
+visible = false
+margin_left = 412.0
+margin_right = 612.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 200, 50 )
+focus_mode = 0
+mouse_default_cursor_shape = 2
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/normal = SubResource( 4 )
+enabled_focus_mode = 0
+text = "Pythagoras' Pike"
+
+[node name="Bow" type="Button" parent="AttackPanel/Attacks"]
+visible = false
+margin_left = 396.0
+margin_right = 628.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 200, 50 )
+focus_mode = 0
+mouse_default_cursor_shape = 2
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/normal = SubResource( 4 )
+enabled_focus_mode = 0
+text = "Sir Cumference's Bow"
+
+[node name="ItemsPanel" type="Panel" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -512.0
+margin_top = -111.0
+margin_right = 512.0
+custom_styles/panel = SubResource( 3 )
+
+[node name="Items" type="HBoxContainer" parent="ItemsPanel"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -90.0
+margin_bottom = -20.0
+custom_constants/separation = 27
+alignment = 1
+
+[node name="Apple" type="Button" parent="ItemsPanel/Items"]
+visible = false
+margin_left = 412.0
+margin_right = 612.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 200, 50 )
+focus_mode = 0
+mouse_default_cursor_shape = 2
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/normal = SubResource( 4 )
+enabled_focus_mode = 0
+text = "APPLE"
+
+[node name="Strawberry" type="Button" parent="ItemsPanel/Items"]
+visible = false
+margin_left = 412.0
+margin_right = 612.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 200, 50 )
+focus_mode = 0
+mouse_default_cursor_shape = 2
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/normal = SubResource( 4 )
+enabled_focus_mode = 0
+text = "STRAWBERRY"
+
+[node name="Mushroom" type="Button" parent="ItemsPanel/Items"]
+visible = false
+margin_left = 412.0
+margin_right = 612.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 200, 50 )
+focus_mode = 0
+mouse_default_cursor_shape = 2
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/normal = SubResource( 4 )
+enabled_focus_mode = 0
+text = "MUSHROOM"
+
+[node name="ActionsPanel" type="Panel" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -512.0
+margin_top = -111.0
+margin_right = 512.0
+custom_styles/panel = SubResource( 3 )
+
+[node name="Actions" type="HBoxContainer" parent="ActionsPanel"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -90.0
+margin_bottom = -20.0
+custom_constants/separation = 27
+alignment = 1
+
+[node name="Run" type="Button" parent="ActionsPanel/Actions"]
+margin_left = 71.0
+margin_right = 271.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 200, 50 )
+focus_mode = 0
+mouse_default_cursor_shape = 2
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/normal = SubResource( 4 )
+enabled_focus_mode = 0
+text = "RUN"
+
+[node name="Attack" type="Button" parent="ActionsPanel/Actions"]
+margin_left = 298.0
+margin_right = 498.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 200, 50 )
+focus_mode = 0
+mouse_default_cursor_shape = 2
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/normal = SubResource( 4 )
+enabled_focus_mode = 0
+text = "ATTACK"
+
+[node name="Defend" type="Button" parent="ActionsPanel/Actions"]
+margin_left = 525.0
+margin_right = 725.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 200, 50 )
+rect_pivot_offset = Vector2( 100, 50 )
+focus_mode = 0
+mouse_default_cursor_shape = 2
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/normal = SubResource( 4 )
+enabled_focus_mode = 0
+text = "DEFEND"
+
+[node name="Items" type="Button" parent="ActionsPanel/Actions"]
+margin_left = 752.0
+margin_right = 952.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 200, 50 )
+rect_pivot_offset = Vector2( 100, 50 )
+focus_mode = 0
+mouse_default_cursor_shape = 2
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/normal = SubResource( 4 )
+enabled_focus_mode = 0
+text = "ITEMS"
+
+[node name="TextBox" type="Panel" parent="."]
+visible = false
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 15.0
+margin_top = -150.0
+margin_right = -15.0
+margin_bottom = -15.0
+custom_styles/panel = SubResource( 3 )
+
+[node name="Label" type="Label" parent="TextBox"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 27.0
+margin_top = -45.5
+margin_right = 975.0
+margin_bottom = 48.5
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 11 )
+text = "An Enemy appears!"
+
+[node name="enemyAnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 12 )
+anims/bossIdle = SubResource( 34 )
+anims/enemyAttackSword = SubResource( 20 )
+anims/enemyDamagedbySpear = SubResource( 27 )
+anims/enemyDamagedbySword = SubResource( 13 )
+anims/enemyDied = SubResource( 21 )
+anims/enemyIdle = SubResource( 29 )
+anims/playerAttackSword = SubResource( 15 )
+anims/playerDamagedbySword = SubResource( 14 )
+anims/skeletonIdle = SubResource( 33 )
+
+[node name="playerAnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 16 )
+anims/enemyDamagedbySword = SubResource( 17 )
+anims/healingAnimation = SubResource( 28 )
+anims/playerAttackAxe = SubResource( 24 )
+anims/playerAttackBow = SubResource( 30 )
+anims/playerAttackDagger = SubResource( 31 )
+anims/playerAttackHammer = SubResource( 25 )
+anims/playerAttackScythe = SubResource( 32 )
+anims/playerAttackSpear = SubResource( 26 )
+anims/playerAttackSword = SubResource( 18 )
+anims/playerDamagedbySword = SubResource( 19 )
+anims/playerDied = SubResource( 22 )
+anims/playerRun = SubResource( 23 )
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[node name="HTTPRequest2" type="HTTPRequest" parent="."]
+
+[node name="AudioPlayers" type="Node" parent="."]
+
+[node name="BackgroundMusicPlayer" type="AudioStreamPlayer" parent="AudioPlayers"]
+stream = ExtResource( 19 )
+volume_db = -14.613
+
+[node name="buttonSound" type="AudioStreamPlayer" parent="AudioPlayers"]
+stream = ExtResource( 20 )
+
+[node name="hitSound" type="AudioStreamPlayer" parent="AudioPlayers"]
+stream = ExtResource( 21 )
+
+[node name="healingSound" type="AudioStreamPlayer" parent="AudioPlayers"]
+stream = ExtResource( 23 )
+
+[node name="attackSound" type="AudioStreamPlayer" parent="AudioPlayers"]
+stream = ExtResource( 22 )
+
+[node name="lossSound" type="AudioStreamPlayer" parent="AudioPlayers"]
+stream = ExtResource( 25 )
+
+[node name="winSound" type="AudioStreamPlayer" parent="AudioPlayers"]
+stream = ExtResource( 24 )
+
+[node name="runSound" type="AudioStreamPlayer" parent="AudioPlayers"]
+stream = ExtResource( 26 )
+volume_db = 12.219
+
+[node name="shieldSound" type="AudioStreamPlayer" parent="AudioPlayers"]
+stream = ExtResource( 27 )
+
+[node name="dissappearSound" type="AudioStreamPlayer" parent="AudioPlayers"]
+stream = ExtResource( 29 )
+volume_db = -20.637
+pitch_scale = 2.46
+
+[connection signal="pressed" from="AttackPanel/Attacks/Sword" to="." method="_on_Sword_pressed"]
+[connection signal="pressed" from="AttackPanel/Attacks/Axe" to="." method="_on_Axe_pressed"]
+[connection signal="pressed" from="AttackPanel/Attacks/Hammer" to="." method="_on_Hammer_pressed"]
+[connection signal="pressed" from="AttackPanel/Attacks/Dagger" to="." method="_on_Dagger_pressed"]
+[connection signal="pressed" from="AttackPanel/Attacks/Scythe" to="." method="_on_Scythe_pressed"]
+[connection signal="pressed" from="AttackPanel/Attacks/Spear" to="." method="_on_Spear_pressed"]
+[connection signal="pressed" from="AttackPanel/Attacks/Bow" to="." method="_on_Bow_pressed"]
+[connection signal="pressed" from="ItemsPanel/Items/Apple" to="." method="_on_Apple_pressed"]
+[connection signal="pressed" from="ItemsPanel/Items/Strawberry" to="." method="_on_Strawberry_pressed"]
+[connection signal="pressed" from="ItemsPanel/Items/Mushroom" to="." method="_on_Mushroom_pressed"]
+[connection signal="pressed" from="ActionsPanel/Actions/Run" to="." method="_on_Run_pressed"]
+[connection signal="pressed" from="ActionsPanel/Actions/Attack" to="." method="_on_Attack_pressed"]
+[connection signal="pressed" from="ActionsPanel/Actions/Defend" to="." method="_on_Defend_pressed"]
+[connection signal="pressed" from="ActionsPanel/Actions/Items" to="." method="_on_Items_pressed"]
+[connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]
+[connection signal="request_completed" from="HTTPRequest2" to="." method="_on_HTTPRequest2_request_completed"]
