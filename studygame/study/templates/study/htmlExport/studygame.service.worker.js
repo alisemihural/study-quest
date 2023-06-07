@@ -3,7 +3,7 @@
 // that they need an Internet connection to run the project if desired.
 // Incrementing CACHE_VERSION will kick off the install event and force
 // previously cached resources to be updated from the network.
-const CACHE_VERSION = "1685713541|61359713";
+const CACHE_VERSION = "1686165252|69704608";
 const CACHE_PREFIX = "StudyTurnBasedGa-sw-cache-";
 const CACHE_NAME = CACHE_PREFIX + CACHE_VERSION;
 const OFFLINE_URL = "studygame.offline.html";
