@@ -1,0 +1,51 @@
+@font-face{
+  font-family: 'Jaune';
+  src: url(../fonts/jaunedoeuf_regular.ttf);
+}
+@font-face{
+  font-family: 'Changa-Semibold';
+  src: url(../fonts/Changa-SemiBold.ttf);
+}
+html, body {
+    font-family: Arial, Helvetica, sans-serif;
+    height: 100%;
+    width: 100%;
+    color: #4b4264;
+    font-family: 'Jaune';
+  }
+  #container{
+    margin-top: 50px;
+  }
+  #container2{
+    margin-left: 10%;
+  }
+  #emailText{
+    margin-left: 30px;
+  }
+  h1{
+    margin-left: 5px;
+    font-family: 'Changa-SemiBold';
+  }
+  button {
+    width: 75px;
+    cursor: pointer;
+    box-shadow: 0px 0px 2px gray;
+    border: none;
+    outline: none;
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
+    background-color:#d57162;
+    margin-top: 30px;
+    margin-left: 100px;
+    font-family: 'Jaune';
+  }
+  .rectangle2{
+    height: 100%;
+    width: 40%;
+    background-color: #fbf3db;
+    margin-left: 30%;
+  }
+  
+  
+  

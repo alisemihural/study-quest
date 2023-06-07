@@ -1,0 +1,61 @@
+@font-face{
+    font-family: 'Jaune';
+    src: url(../fonts/jaunedoeuf_regular.ttf);
+  }
+@font-face{
+    font-family: 'Changa-Semibold';
+    src: url(../fonts/Changa-SemiBold.ttf);
+}
+ html, body {
+    height: 120%;
+    width: 100%;
+    background-color: #3f3754;
+    background-image: linear-gradient(to bottom, #270563, #260562, #3f3754, #3f3754, #3f3754);
+    background-color: #3f3754;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color:  #d57162 ;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: #fbf3db;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-family: 'Jaune','Courier New', Courier, monospace;
+    font-size: medium;
+}
+
+li a:hover {
+    background-color: #e17f70;
+}
+.headerImg{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 25%;
+}
+#accountButtons{
+    float: right;
+}
+.rectangle{
+  height: 10%;
+  width: 100%;
+  background-color: #fbf3db;
+}
+
+.container{
+    margin-left: 40%;
+    color: #fbf3db;
+    font-family: 'Changa-Semibold','Courier New', Courier, monospace;
+    font-size: medium;
+}
